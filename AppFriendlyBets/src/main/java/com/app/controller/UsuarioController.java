@@ -46,7 +46,15 @@ public class UsuarioController {
 	@GetMapping("/usuario/{email}/{password}")
 	public long validarUsuario(@PathVariable(value = "email") String email,
 							   @PathVariable(value = "password") String password) {
-		return usuarioRepository.findByEmail(email, password);
+		
+		Long value;
+		try {
+			value = usuarioRepository.findByEmail(email, password);
+		} catch (Exception e) {
+			// TODO: handle exception
+			value = Long.parseLong("0");
+		}
+		return value;
 	}
 	
 	@CrossOrigin(origins = "*", allowCredentials = "true")
